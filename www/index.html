@@ -7,7 +7,7 @@
       <link rel="stylesheet" href="jquery.mobile-1.0.1.css" />
       <script src="jquery.js"></script>
       <script src="jquery.mobile-1.0.1.js"></script>
-      <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>      
+      <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
       
       <script type="text/javascript" charset="utf-8">
           //PhoneGap test
@@ -16,7 +16,7 @@
 	          document.addEventListener("deviceready", onDeviceReady, false);
           }
           function onDeviceReady(){
-          };
+            };
           
           var pictureSource;   // picture source
           var destinationType; // sets the format of returned value 
@@ -99,7 +99,7 @@
           // 
           function onFail(message) {
               alert('Failed because: ' + message);
-          }    
+          }
           
           </script>
   </head>
@@ -172,21 +172,41 @@
         <div data-role="header">
               <h1>Oslo</h1>
         </div>
-          
-        <h1>Beats Øreplugger - løkka</h1>
-        <img src="Monster_Beats_inear_headphones_99.jpg" alt="Bildet kan ikke vises" width="200px" height="180px"/>
+
+        <div data-role="content">
+  
+            <h1>Beats Øreplugger - løkka</h1>
+            <img src="Monster_Beats_inear_headphones_99.jpg" alt="Bildet kan ikke vises" width="200px" height="180px"/>
         
-        <h2>Beskrivelse</h2>
-        <p>Fant et par Beats Øreplugger utenfor Subway på løkka, ene gummiflappen mangler på venster plugg, ellers i fin stand</p>
+            <h2>Beskrivelse</h2>
+            <p>Fant et par Beats Øreplugger utenfor Subway på løkka, ene gummiflappen mangler på venster plugg, ellers i fin stand</p>
         
-        <h2>Kontaktinfo</h2>
+            <h2>Kontaktinfo</h2>
         
-        <a href="tel:40609042">Ring finneren</a>
-        <br>
-        <a href="sms:40609042">SMS til finneren</a>
-        <br>
-        <a href="mailto:jorchr09@nith.no">Mail finneren</a>
+            <a href="tel:40609042">Ring finneren</a>
+            <br>
+            <a href="sms:40609042">SMS til finneren</a>
+            <br>
+            <a href="mailto:jorchr09@nith.no">Mail finneren</a>
+        
+            <h2>Hvor gjenstanden ble funnet</h2>
+            
+        </div>
     </div>
+      
+    <div data-role="page" id="funnet" data-add-back-btn="true">
+          <div data-role="header">
+              <h1>Funnet gjenstand</h1>
+          </div>
+          
+          <div data-role="content">
+              <input type="text" name="txt" id="txtarea" value="Navn på gjenstanden" />
+              <button onclick="capturePhoto();">Ta et bilde av gjenstanden</button> <br>
+              <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+              <textarea cols="40" rows="8" name="textarea" id="textarea">Beskrivelse av gjenstanden</textarea>
+          </div>
+    </div>
+
       
   </body>
 </html>
