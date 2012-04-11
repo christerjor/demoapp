@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      
+      <script src="http://192.168.1.129:8080/target/target-script-min.js#anonymous"></script>
+      <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+      <title>Tapt og Funnet</title>
+      <link rel="stylesheet" href="jquery.mobile-1.0.1.css" />
+      <script src="jquery.js"></script>
+      <script src="jquery.mobile-1.0.1.js"></script>
+      <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>      
+      
+      <script type="text/javascript" charset="utf-8">
+          //PhoneGap test
+          function onLoad(){
+              
+	          document.addEventListener("deviceready", onDeviceReady, false);
+          }
+          function onDeviceReady(){
+          };
+          
+          var pictureSource;   // picture source
+          var destinationType; // sets the format of returned value 
+          
+          // Wait for PhoneGap to connect with the device
+          //
+          document.addEventListener("deviceready",onDeviceReady,false);
+          
+          // PhoneGap is ready to be used!
+          //
+          function onDeviceReady() {
+              pictureSource=navigator.camera.PictureSourceType;
+              destinationType=navigator.camera.DestinationType;
+          }
+          
+          // Called when a photo is successfully retrieved
+          //
+          function onPhotoDataSuccess(imageData) {
+              // Uncomment to view the base64 encoded image data
+              // console.log(imageData);
+              
+              // Get image handle
+              //
+              var smallImage = document.getElementById('smallImage');
+              
+              // Unhide image elements
+              //
+              smallImage.style.display = 'block';
+              
+              // Show the captured photo
+              // The inline CSS rules are used to resize the image
+              //
+              smallImage.src = "data:image/jpeg;base64," + imageData;
+          }
+          
+          // Called when a photo is successfully retrieved
+          //
+          function onPhotoURISuccess(imageURI) {
+              // Uncomment to view the image file URI 
+              // console.log(imageURI);
+              
+              // Get image handle
+              //
+              var largeImage = document.getElementById('largeImage');
+              
+              // Unhide image elements
+              //
+              largeImage.style.display = 'block';
+              
+              // Show the captured photo
+              // The inline CSS rules are used to resize the image
+              //
+              largeImage.src = imageURI;
+          }
+          
+          // A button will call this function
+          //
+          function capturePhoto() {
+              // Take picture using device camera and retrieve image as base64-encoded string
+              navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+          }
+          
+          // A button will call this function
+          //
+          function capturePhotoEdit() {
+              // Take picture using device camera, allow edit, and retrieve image as base64-encoded string  
+              navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true }); 
+          }
+          
+          // A button will call this function
+          //
+          function getPhoto(source) {
+              // Retrieve image file location from specified source
+              navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
+                                          destinationType: destinationType.FILE_URI,
+                                          sourceType: source });
+          }
+          
+          // Called if something bad happens.
+          // 
+          function onFail(message) {
+              alert('Failed because: ' + message);
+          }    
+          
+          </script>
+  </head>
+	
+  <body onload="onLoad();">
+    <div data-role="page" id="home">
+        
+      <div data-role="header">
+          <h1>Tapt og Funnet</h1>
+      </div>
+        
+       <ul data-role="listview">
+         <li><a href="#">Eksempel 1</a></li>
+         <li><a href="#">Eksempel 2</a></li>
+         <li><a href="#">Eksempel 3</a></li>
+         <li><a href="#">Eksempel 4</a></li>
+         <li><a href="#">Eksempel 5</a></li>
+         <li><a href="#">Eksempel 6</a></li>
+         <li><a href="#">Eksempel 7</a></li>
+         <li><a href="#">Eksempel 8</a></li>
+      </ul>
+      
+      <div data-role="footer" data-position="fixed">
+          <div data-role="navbar">
+              <ul>
+                  <li><a href="#mistet" data-icon="minus">Mistet</a></li>
+                  <li><a href="#funnet" data-icon="plus">Funnet</a></li>
+                  <li><a href="#varsling" data-icon="alert">Varsling</a></li>
+              </ul>
+          </div>
+      </div>
+        
+    </div>
+    <div data-role="page" id="mistet" data-add-back-btn="true">
+        <div data-role="header">
+            <h1>Mistet</h1>
+        </div>
+
+        <h1>Hvor mistet du gjenstanden?</h1>
+        
+        <ul data-role="listview">
+            <li><a href="#oslo">Oslo<span class="ui-li-count ui-btn-up-c ui-btn-corner-all">3</span></a></li>
+            <li><a href="#">Eksempel 2</a></li>
+            <li><a href="#">Eksempel 3</a></li>
+            <li><a href="#">Eksempel 4</a></li>
+            <li><a href="#">Eksempel 5</a></li>
+            <li><a href="#">Eksempel 6</a></li>
+            <li><a href="#">Eksempel 7</a></li>
+            <li><a href="#">Eksempel 8</a></li>
+        </ul>
+    </div>
+      
+    <div data-role="page" id="oslo" data-add-back-btn="true">
+        <div data-role="header">
+            <h1>Oslo</h1>
+            <input type="search" name="search" id="searc-basic" value="Søk etter gjenstand" />
+        </div>
+        
+        <h1>Siste funn i Oslo</h1>
+        
+        <ul data-role="listview">
+            <li><a href="#headset">Beats Øreplugger - løkka</a></li>
+            <li><a href="#">Eksempel 2</a></li>
+            <li><a href="#">Eksempel 3</a></li>
+        </ul>
+        
+    </div>
+  </body>
+</html>
