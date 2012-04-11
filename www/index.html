@@ -16,6 +16,7 @@
 	          document.addEventListener("deviceready", onDeviceReady, false);
           }
           function onDeviceReady(){
+              navigator.geolocation.getCurrentPosition(onSuccess, onError);
             };
           
           var pictureSource;   // picture source
@@ -99,6 +100,48 @@
           // 
           function onFail(message) {
               alert('Failed because: ' + message);
+          }
+          
+          // onSuccess Geolocation
+          //
+          function onSuccess(position) {
+              var element = document.getElementById('geolocation');
+              element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+              'Longitude: '          + position.coords.longitude             + '<br />' +
+              'Altitude: '           + position.coords.altitude              + '<br />' +
+              'Accuracy: '           + position.coords.accuracy              + '<br />' +
+              'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+              'Heading: '            + position.coords.heading               + '<br />' +
+              'Speed: '              + position.coords.speed                 + '<br />' +
+              'Timestamp: '          + new Date(position.timestamp)          + '<br />';
+          }
+          
+          // onError Callback receives a PositionError object
+          //
+          function onError(error) {
+              alert('code: '    + error.code    + '\n' +
+                    'message: ' + error.message + '\n');
+          }
+          
+          
+          function showAlert() {
+              navigator.notification.alert(
+                                           'Det er blitt lagt til et Beats headset!',  // message
+                                           'Varsel',            // title
+                                           'Er det ditt?'                  // buttonName
+                                           );
+          }
+          
+          // Beep three times
+          //
+          function playBeep() {
+              navigator.notification.beep(3);
+          }
+          
+          // Vibrate for 2 seconds
+          //
+          function vibrate() {
+              navigator.notification.vibrate(2000);
           }
           
           </script>
@@ -244,8 +287,24 @@
                 <label for="checkbox-3">Telefon</label>
             </fieldset>
               
+            <p id="geolocation">Finding geolocation...</p>
+              
           </div>
     </div>
+
+      <div data-role="page" id="varsling" data-add-back-btn="true">
+          
+          <div data-role="header">
+              <h1>Eksempel på Varsling</h1>
+          </div>
+          
+          <div data-role="content">
+              <p><a href="#" onclick="showAlert(); return false;">Show Alert</a></p>
+              <p><a href="#" onclick="playBeep(); return false;">Play Beep</a></p>
+              <p><a href="#" onclick="vibrate(); return false;">Vibrate</a></p>
+          </div>
+          
+      </div>
 
       
   </body>
